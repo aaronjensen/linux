@@ -484,6 +484,8 @@ static const struct x86_cpu_id snc_cpu[] = {
 
 static bool match_llc(struct cpuinfo_x86 *c, struct cpuinfo_x86 *o)
 {
+	return true;
+
 	int cpu1 = c->cpu_index, cpu2 = o->cpu_index;
 
 	/* Do not match if we do not have a valid APICID for cpu: */
@@ -650,7 +652,7 @@ void set_cpu_sibling_map(int cpu)
 /* maps the cpu to the sched domain representing multi-core */
 const struct cpumask *cpu_coregroup_mask(int cpu)
 {
-	return cpu_llc_shared_mask(cpu);
+	return cpu_llc_shared_mask(0);
 }
 
 static void impress_friends(void)
